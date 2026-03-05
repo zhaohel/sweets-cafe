@@ -1,0 +1,82 @@
+{% extends "base.html" %}
+
+{% block body %}
+
+<main>
+
+    <section>
+        <h2>Welcome to Sweets Café!</h2>
+
+        <p>
+            Sweets Café is a cozy Asian patisserie that focuses on handcrafted desserts
+            and specialty drinks made with care and attention to detail.
+            We serve favorites including classic mantou, rich snowflake crisps,
+            and smooth matcha lattes made with high-quality matcha.
+        </p>
+
+        <p>
+            Some of our signature drinks include the banana cream matcha latte
+            and the cream-top matcha latte, balancing sweetness and earthy flavors
+            in a comforting way.
+        </p>
+
+        <p>
+            <a href="{{ url_for('order') }}">place an order</a>.
+        </p>
+    </section>
+
+    <section>
+    <h2>Featured Items</h2>
+
+    <div class="menu-section">
+
+        <article class="menu-card">
+            <img src="{{ url_for('static', filename='image/mantou.jpg') }}"
+                 alt="Mantou Chinese steamed buns">
+            <h4>Mantou 饅頭</h4>
+            <p>Soft, fluffy traditional steamed buns served warm.</p>
+        </article>
+
+        <article class="menu-card">
+            <img src="{{ url_for('static', filename='image/strawberry_matcha.jfif') }}"
+                 alt="Strawberry Matcha Latte">
+            <h4>Strawberry Matcha Latte</h4>
+            <p>Fresh strawberry puree layered with ceremonial matcha.</p>
+        </article>
+
+        <article class="menu-card">
+            <img src="{{ url_for('static', filename='image/snowflake_crisps.webp') }}"
+                 alt="Snowflake Crisps">
+            <h4>Snowflake Crisps 雪花酥</h4>
+            <p>Chewy milk nougat squares with nuts and dried fruit.</p>
+        </article>
+
+        </div>
+    </section>
+
+    <section>
+        <h2>Technologies Used</h2>
+
+        <ul>
+            <li>🐍 Python & Flask</li>
+            <li >💾 SQLAlchemy</li>
+            <li>📧 Mailgun API</li>
+        </ul>
+
+        <p>
+            The system processes orders and sends automated receipts to both the customer and the café owner.
+        </p>
+    </section>
+
+    <section>
+        <h2>Contact Information</h3>
+        <address>
+            📍 Portland, Oregon<br>
+            📞 (503) 123-4567<br>
+            ✉ helenayizhao@gmail.com
+        </address>
+    </section>
+
+</main>
+
+{% endblock %}

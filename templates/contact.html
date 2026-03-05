@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block body %}
+
+<h2>Contact Us</h2>
+
+<p>📍 Portland, OR</p>
+<p>🕒 Open daily: 6:30am – 2pm</p>
+<p>📧 helenayhazo@gmail.com</p>
+
+<form method="POST" action="/contact">
+    
+    <label>Name:</label>
+    <input type="text" name="name" required>
+
+    <label>Email:</label>
+    <input type="email" name="email" required>
+
+    <label>Message:</label>
+    <textarea name="message" required></textarea>
+
+    <button type="submit">Send</button>
+</form>
+
+{% endblock %}

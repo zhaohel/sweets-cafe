@@ -1,0 +1,38 @@
+- create frontend
+npx create-react-app client
+
+
+#create virtual environment and get dependencies, make sure you have python installed. 
+
+
+#make the virtual environment
+python -m venv env                -if using python
+
+#activate the virtual environment
+source env/bin/activate           -if using mac
+env\Scripts\activate              -if using windows
+
+#deactivate
+source env/bin/deactivate           -if using mac
+env\Scripts\deactivate              -if using windows
+
+#install dependencies
+pip install Flask 
+pip install Flask-sqlalchemy-lite 
+pip install Flask-SQLAlchemy 
+pip install flask-security
+pip install setuptools 
+pip install python-dotenv
+pip install requests
+
+# hosting on render
+pip install flask gunicorn
+
+# run app
+python app.py
+
+------------------ 
+if windows intercepts python 
+env\Scripts\python.exe -m pip install flask
+env\Scripts\python.exe app.py
+

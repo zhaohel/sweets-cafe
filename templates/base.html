@@ -1,0 +1,39 @@
+<!--favicon source : https://www.favicon.cc/?action=icon&file_id=847061-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sweets Café</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}">
+
+    {% block head %}{% endblock %}
+</head>
+
+<body>
+
+    <header>
+        <h1>Sweets Café 🍰</h1>
+        <nav>
+            <a href="{{ url_for('index') }}">Home</a>
+            <a href="{{ url_for('order') }}">Order</a>
+            <a href="{{ url_for('contact') }}">Contact</a>
+
+        </nav>
+    </header>
+
+    <main>
+        <section class="about">
+            {% block body %}{% endblock %}
+        </section>
+    </main>
+
+    <footer>
+        <p>© 2026 Helena Zhao. All rights reserved.</p>
+    </footer>
+
+</body>
+</html>
