@@ -188,3 +188,17 @@ li {
     width: 80px;
     text-align: center;
 }
+
+.flash-container {
+    margin: 20px auto;
+    max-width: 600px;
+}
+
+.flash-message {
+    background: #e6f7e6;
+    border: 1px solid #9ed79e;
+    padding: 12px;
+    border-radius: 6px;
+    text-align: center;
+    margin-bottom: 10px;
+}
