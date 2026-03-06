@@ -26,7 +26,6 @@
     </header>
 
     <main>
-    {% from "flask" import get_flashed_messages %}
         {% with messages = get_flashed_messages() %}
             {% if messages %}
                 <div class="flash-container">
