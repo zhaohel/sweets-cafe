@@ -18,29 +18,25 @@ db.init_app(app)
 
 register_routes(app)
 
-with app.app_context():
-    db.create_all()
+def init_db():
+    with app.app_context():
+        db.create_all()
 
-    from models import MenuItem
+        from models import MenuItem
 
-    if not MenuItem.query.first():
-        items = [
-            MenuItem(name="Mantou", price=3.00),
-            MenuItem(name="Snowflake Crisps", price=4.50),
-            MenuItem(name="Youtiao", price=3.00),
-            MenuItem(name="Banana Matcha", price=6.50),
-            MenuItem(name="Cheesefoam Matcha", price=6.50),
-            MenuItem(name="Strawberry Matcha", price=6.75),
-        ]
-        db.session.add_all(items)
-        db.session.commit()
+        if not MenuItem.query.first():
+            items = [
+                MenuItem(name="Mantou", price=3.00),
+                MenuItem(name="Snowflake Crisps", price=4.50),
+                MenuItem(name="Youtiao", price=3.00),
+                MenuItem(name="Banana Matcha", price=6.50),
+                MenuItem(name="Cheesefoam Matcha", price=6.50),
+                MenuItem(name="Strawberry Matcha", price=6.75),
+            ]
+            db.session.add_all(items)
+            db.session.commit()
 
-#run locally
 if __name__ == "__main__":
-    app.run(debug=True)
-
-
-#prodction 
-if __name__ == "__main__":
+    init_db()
     port = int(os.environ.get("PORT", 5000))
     app.run(host="0.0.0.0", port=port, debug=True)
