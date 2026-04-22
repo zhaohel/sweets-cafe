@@ -21,8 +21,6 @@ app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 
 db.init_app(app)
 
-register_routes(app)
-
 def init_db():
     with app.app_context():
         db.create_all()
@@ -40,8 +38,11 @@ def init_db():
             ]
             db.session.add_all(items)
             db.session.commit()
+            
+register_routes(app)
+
+init_db()
 
 if __name__ == "__main__":
-    init_db()
     port = int(os.environ.get("PORT", 5000))
     app.run(host="0.0.0.0", port=port, debug=True)
