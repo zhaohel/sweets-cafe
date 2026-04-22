@@ -24,6 +24,7 @@ pip install flask-security
 pip install setuptools 
 pip install python-dotenv
 pip install requests
+pip install pytz
 
 # hosting on render
 pip install flask gunicorn
@@ -36,3 +37,6 @@ if windows intercepts python
 env\Scripts\python.exe -m pip install flask
 env\Scripts\python.exe app.py
 
+# admin page login credentials
+username: admin
+password: admin 

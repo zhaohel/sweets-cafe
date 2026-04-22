@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+{% block body %}
+
+<div class="logout-container">
+    <form method="POST" action="{{ url_for('logout') }}">
+        <button type="submit">Logout</button>
+    </form>
+</div>
+
+<h2>Admin Dashboard</h2>
+
+<h3>Total Revenue</h3>
+<p><strong>${{ "%.2f"|format(total_revenue) }}</strong></p>
+
+<h3>All Orders</h3>
+
+{% if orders %}
+    {% for order in orders %}
+        <div class="order-box">
+
+            <p><strong>Name:</strong> {{ order.customer_name }}</p>
+            <p><strong>Email:</strong> {{ order.customer_email }}</p>
+            <p><strong>Date:</strong> {{ order.created_at.strftime('%b %d, %Y • %I:%M %p') }}</p>
+
+            <ul>
+                {% if order.items %}
+                    {% for item in order.items %}
+                        <li>
+                            {{ item.item_name }} x{{ item.quantity }} 
+                            - ${{ "%.2f"|format(item.line_total) }}
+                        </li>
+                    {% endfor %}
+                {% endif %}
+            </ul>
+
+            <p><strong>Total:</strong> ${{ "%.2f"|format(order.total_price) }}</p>
+
+        </div>
+    {% endfor %}
+{% else %}
+    <p>No orders yet.</p>
+{% endif %}
+
+{% endblock %}

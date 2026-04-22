@@ -1,8 +1,15 @@
-from flask import render_template, request, redirect, flash
+from flask import render_template, request, redirect, flash, session
 from models import Order, OrderItem, MenuItem
 from extensions import db
 from notifications import send_order_notifications, send_contact_message
+from datetime import datetime
+from werkzeug.security import generate_password_hash, check_password_hash
+import pytz, os
 
+pst = pytz.timezone("America/Los_Angeles")
+
+ADMIN_USERNAME = os.getenv("ADMIN_USERNAME")
+ADMIN_PASSWORD_HASH = os.getenv("ADMIN_PASSWORD_HASH")
 
 def register_routes(app):
 
@@ -12,6 +19,7 @@ def register_routes(app):
 
     @app.route("/order", methods=["GET", "POST"])
     def order():
+        print("METHOD:", request.method)
 
         if request.method == "POST":
 
@@ -86,12 +94,12 @@ def register_routes(app):
             else:
                 flash("Order saved but email may have failed.")
 
-            return redirect("/order")
+            return redirect(f"/order/confirmation/{order.id}")
 
         menu_items = MenuItem.query.all()
         menu_dict = {item.name: item.price for item in menu_items}
         return render_template("order.html", menu_dict=menu_dict)
-
+    
     @app.route("/contact", methods=["GET", "POST"])
     def contact():
 
@@ -110,3 +118,40 @@ def register_routes(app):
             return redirect("/contact")
 
         return render_template("contact.html")
+    
+    @app.route("/admin")
+    def admin():
+        if not session.get("admin"):
+            return redirect("/login")
+
+        orders = Order.query.order_by(Order.created_at.desc()).all()
+        for order in orders:
+            if order.created_at:
+                order.created_at = order.created_at.replace(tzinfo=pytz.utc).astimezone(pst)
+        total_revenue = sum(order.total_price for order in orders)
+
+        return render_template("admin.html", orders=orders, total_revenue=total_revenue)
+    
+    @app.route("/login", methods=["GET", "POST"])
+    def login():
+        if request.method == "POST":
+            username = request.form.get("username")
+            password = request.form.get("password")
+
+            print("USERNAME ENTERED:", username)
+            print("PASSWORD ENTERED:", password)
+            print("STORED HASH:", ADMIN_PASSWORD_HASH)
+            print("CHECK RESULT:", check_password_hash(ADMIN_PASSWORD_HASH, password))
+            
+            if username == ADMIN_USERNAME and check_password_hash(ADMIN_PASSWORD_HASH, password):
+                session["admin"] = True
+                return redirect("/admin")
+
+            flash("Invalid credentials")
+
+        return render_template("adminlogin.html")
+    
+    @app.route("/logout", methods=["POST"])
+    def logout():
+        session.pop("admin", None)
+        return redirect("/")
