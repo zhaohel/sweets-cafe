@@ -5,10 +5,15 @@ import os
 from extensions import db
 from routes import register_routes
 
+import logging
+logging.basicConfig(level=logging.DEBUG)
+
 load_dotenv(override=True)
 
 # My App
 app = Flask(__name__)
+app.config["PROPAGATE_EXCEPTIONS"] = True
+
 app.secret_key = os.getenv("FLASK_SECRET_KEY", "dev-secret-key")
 
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///orders.db"
