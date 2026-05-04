@@ -13,6 +13,10 @@
         </form>
     </section>
 
+    {% if message %}
+        <p>{{ message }}</p>
+    {% endif %}
+
     {% if orders %}
     <section>
         <h3>Your Orders</h3>
