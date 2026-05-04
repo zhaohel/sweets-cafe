@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block body %}
+
+<main>
+
+    <section>
+        <h2>Order Confirmation</h2>
+
+        <p>Thank you for your order, {{ order.customer_name }}!</p>
+
+        <p><strong>Order ID:</strong> {{ order.id }}</p>
+        <p><strong>Total:</strong> ${{ "%.2f"|format(order.total_price) }}</p>
+
+        <h3>Items Ordered:</h3>
+        <ul>
+            {% for item in order.items %}
+                <li>
+                    {{ item.item_name }} x{{ item.quantity }}
+                    (${{ "%.2f"|format(item.line_total) }})
+                </li>
+            {% endfor %}
+        </ul>
+
+        <p>
+            <a href="{{ url_for('order') }}">Place another order</a>
+        </p>
+
+    </section>
+
+</main>
+
+{% endblock %}

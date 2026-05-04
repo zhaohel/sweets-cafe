@@ -100,6 +100,25 @@ def register_routes(app):
         menu_dict = {item.name: item.price for item in menu_items}
         return render_template("order.html", menu_dict=menu_dict)
     
+    @app.route("/order/confirmation/<int:order_id>")
+    def order_confirmation(order_id):
+        order = Order.query.get_or_404(order_id)
+        return render_template("confirmation.html", order=order)
+    
+    @app.route("/about")
+    def about():
+        return render_template("about.html")
+
+    @app.route("/order-status", methods=["GET", "POST"])
+    def order_status():
+        orders = []
+
+        if request.method == "POST":
+            email = request.form.get("email")
+            orders = Order.query.filter_by(customer_email=email).all()
+
+        return render_template("order_status.html", orders=orders)
+
     @app.route("/contact", methods=["GET", "POST"])
     def contact():
 

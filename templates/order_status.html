@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% block body %}
+
+<main>
+
+    <section>
+        <h2>Check Your Orders</h2>
+
+        <form method="POST">
+            <input type="email" name="email" placeholder="Enter your email" required>
+            <button type="submit">Search</button>
+        </form>
+    </section>
+
+    {% if orders %}
+    <section>
+        <h3>Your Orders</h3>
+
+        {% for order in orders %}
+            <div>
+                <p><strong>Order ID:</strong> {{ order.id }}</p>
+                <p><strong>Total:</strong> ${{ "%.2f"|format(order.total_price) }}</p>
+
+                <ul>
+                    {% for item in order.items %}
+                        <li>{{ item.item_name }} x{{ item.quantity }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+            <hr>
+        {% endfor %}
+    </section>
+    {% endif %}
+
+</main>
+
+{% endblock %}

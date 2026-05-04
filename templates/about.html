@@ -1,0 +1,69 @@
+{% extends "base.html" %}
+
+{% block body %}
+
+<main>
+
+    <section>
+        <h2>Technologies & Application Design</h2>
+
+        <p>
+            This application was built using a full-stack approach to support both
+            customer interaction and backend processing. The main goal was to create
+            a simple and efficient ordering system for a small business while keeping
+            the user experience intuitive and easy to navigate.
+        </p>
+
+        <p>
+            The backend was developed using Python and Flask, which handles routing,
+            form submissions, and overall application logic. Separate endpoints were
+            created for key pages such as Home, About, Order, Contact, and Admin.
+            This structure keeps the application organized and allows each part of
+            the system to handle a specific responsibility.
+        </p>
+
+        <p>
+            A relational database is used to store customer orders and item details.
+            Each order includes the customer’s information, selected items, quantities,
+            and total price. SQLAlchemy is used to manage the database, making it easier
+            to create, store, and retrieve data without writing complex SQL queries.
+        </p>
+
+        <ul>
+            <li>🐍 Flask handles routing, user requests, and form submissions</li>
+            <li>💾 SQLAlchemy manages structured order and item data</li>
+            <li>📧 Mailgun API sends automated emails for orders and contact messages</li>
+        </ul>
+
+        <p>
+            When a user places an order, the system processes the selected items,
+            calculates the total price based on quantity and item cost, and stores
+            the order in the database. Input validation ensures that at least one
+            item is selected before the order is submitted.
+        </p>
+
+        <p>
+            After the order is saved, the application triggers email notifications
+            using the Mailgun API. A confirmation message is sent to the customer,
+            while a detailed order summary is sent to the business owner. This helps
+            ensure that both sides receive immediate feedback after an order is placed.
+        </p>
+
+        <ul>
+            <li>Validates user input before processing orders</li>
+            <li>Calculates totals dynamically based on selected items</li>
+            <li>Stores order and item relationships in the database</li>
+            <li>Displays all orders in an admin dashboard with totals and timestamps</li>
+        </ul>
+
+        <p>
+            From a design perspective, the application focuses on reducing friction
+            in the ordering process. Menu browsing and ordering are combined into a
+            single page to minimize navigation, and the layout is kept simple so users
+            can quickly select items and complete their order.
+        </p>
+    </section>
+
+</main>
+
+{% endblock %}
