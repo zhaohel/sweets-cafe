@@ -117,9 +117,11 @@ def register_routes(app):
             email = request.form.get("email")
             orders = Order.query.filter_by(customer_email=email).all()
 
-        if not orders:
-            flash("Sorry, no orders were found with this email.")
-        
+            if not orders:
+                flash("Sorry, no orders were found with this email.")
+            else:
+                flash(f"{len(orders)} order(s) found!", "success")
+            
         return render_template("order_status.html", orders=orders)
 
     @app.route("/contact", methods=["GET", "POST"])
