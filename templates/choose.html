@@ -1,0 +1,86 @@
+{% extends "base.html" %}
+
+{% block body %}
+
+<main>
+    <section>
+        <h2>Not Sure What to Order?</h2>
+        <p>Choose what sounds good, and we will recommend something from our menu.</p>
+
+        <div class="choice-buttons">
+            <button type="button" onclick="showRecommendation('sweet')">Sweet</button>
+            <button type="button" onclick="showRecommendation('warm')">Warm</button>
+            <button type="button" onclick="showRecommendation('matcha')">Matcha</button>
+            <button type="button" onclick="showRecommendation('dessert')">Dessert</button>
+            <button type="button" onclick="showRecommendation('drink')">Drink</button>
+            <button type="button" onclick="showRecommendation('light')">Light</button>
+        </div>
+    </section>
+
+    <section id="recommendation-box" style="display: none;">
+        <img id="recommendation-image" src="" alt="Recommended menu item" class="recommendation-image">
+
+        <h3 id="recommendation-title"></h3>
+
+        <p id="recommendation-text"></p>
+
+        <a class="btn" href="{{ url_for('order') }}">Order Now</a>
+    </section>
+</main>
+
+<script>
+function showRecommendation(choice) {
+
+    const recommendations = {
+
+        sweet: {
+            title: "Snowflake Crisps 雪花酥",
+            text: "A chewy and sweet dessert with milk nougat, nuts, and dried fruit.",
+            image: "{{ url_for('static', filename='image/snowflake_crisps.webp') }}"
+        },
+
+        warm: {
+            title: "Mantou 饅頭",
+            text: "Soft steamed buns served warm. A cozy and simple choice.",
+            image: "{{ url_for('static', filename='image/mantou.jpg') }}"
+        },
+
+        matcha: {
+            title: "Strawberry Matcha Latte",
+            text: "A sweet and refreshing drink with strawberry and matcha.",
+            image: "{{ url_for('static', filename='image/strawberry_matcha.jfif') }}"
+        },
+
+        dessert: {
+            title: "Youtiao 油条",
+            text: "Crispy fried dough sticks that pair well with tea.",
+            image: "{{ url_for('static', filename='image/youtiao.webp') }}"
+        },
+
+        drink: {
+            title: "Banana Cream Matcha Latte",
+            text: "A creamy matcha drink with banana flavor.",
+            image: "{{ url_for('static', filename='image/banana_matcha.jfif') }}"
+        },
+
+        light: {
+            title: "Cheesefoam Matcha Latte",
+            text: "A smooth matcha latte with a creamy cheese foam topping.",
+            image: "{{ url_for('static', filename='image/cheesefoam_matcha.jfif') }}"
+        }
+    };
+
+    document.getElementById("recommendation-title").textContent =
+        recommendations[choice].title;
+
+    document.getElementById("recommendation-text").textContent =
+        recommendations[choice].text;
+
+    document.getElementById("recommendation-image").src =
+        recommendations[choice].image;
+
+    document.getElementById("recommendation-box").style.display = "block";
+}
+</script>
+
+{% endblock %}

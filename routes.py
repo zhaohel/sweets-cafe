@@ -179,3 +179,7 @@ def register_routes(app):
     def logout():
         session.pop("admin", None)
         return redirect("/")
+    
+    @app.route("/choose")
+    def choose():
+        return render_template("choose.html")
